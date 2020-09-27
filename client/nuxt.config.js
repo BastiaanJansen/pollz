@@ -1,5 +1,5 @@
 export default {
-	mode: "spa",
+	ssr: false,
 	/*
 	 ** Headers of the page
 	 */
@@ -69,23 +69,20 @@ export default {
 		authenticationType: "Basic",
 		clientConfigs: {
 			default: {
-				httpEndpoint: "http://192.168.178.22:3000/graphql",
+				httpEndpoint: `http://localhost:3000/graphql`,
 				persisting: false,
 				websocketsOnly: false,
-				wsEndpoint: "ws://192.168.178.22:3000/graphql"
+				wsEndpoint: `ws://localhost:3000/graphql`
 			}
 		},
 		authenticationType: "Bearer",
 		errorHandler: "~/plugins/apollo-error-handler.js"
 	},
-	axios: {
-		baseUrl: "http://localhost:3000"
-	},
 	build: {
 		/*
 		 ** You can extend webpack config here
 		 */
-		extend(config, ctx) {}
+		extend(config, ctx) { }
 	},
 	generate: {
 		routes: ["/"]

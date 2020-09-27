@@ -3,7 +3,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { PollsModule } from "./polls/polls.module";
 import { MongooseModule } from "@nestjs/mongoose";
 import { OptionsModule } from "./options/options.module";
-import * as config from "config";
+import config from "config";
 import { join } from "path";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
@@ -21,13 +21,7 @@ const dbConfig = config.get("db");
 			context: ({ req }) => ({ req })
 		}),
 		MongooseModule.forRoot(
-			"mongodb+srv://" +
-				dbConfig.username +
-				":" +
-				dbConfig.password +
-				"@cluster0-7lxoa.mongodb.net/" +
-				dbConfig.database +
-				"?retryWrites=true&w=majority",
+			`mongodb://mongo:27017/pollz`,
 			{
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -43,4 +37,4 @@ const dbConfig = config.get("db");
 	controllers: [],
 	providers: []
 })
-export class AppModule {}
+export class AppModule { }

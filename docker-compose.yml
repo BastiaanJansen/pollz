@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+    mongo:
+        image: mongo
+        volumes:
+            - ./data:/data/db
+    client:
+        build: ./client
+        ports:
+            - 80:8080
+    api:
+        build: ./server
+        ports:
+            - 3000:3000
+    

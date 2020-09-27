@@ -4,7 +4,7 @@ import { AuthResolver } from "./auth.resolver";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserSchema } from "src/users/user.schema";
 import { JwtModule } from "@nestjs/jwt";
-import * as config from "config";
+import config from "config";
 import { PassportModule } from "@nestjs/passport";
 import { JwtStrategy } from "./jwt.strategy";
 import { UsersModule } from "src/users/users.module";
@@ -17,7 +17,7 @@ const jwtConfig = config.get("jwt");
 			defaultStrategy: "jwt"
 		}),
 		JwtModule.register({
-			secretOrPrivateKey: jwtConfig.secret,
+			secret: jwtConfig.secret,
 			signOptions: {
 				expiresIn: jwtConfig.expiresIn
 			}
@@ -28,4 +28,4 @@ const jwtConfig = config.get("jwt");
 	providers: [AuthService, AuthResolver, JwtStrategy],
 	exports: [JwtStrategy, PassportModule]
 })
-export class AuthModule {}
+export class AuthModule { }

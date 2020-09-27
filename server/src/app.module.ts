@@ -10,8 +10,6 @@ import { AuthModule } from "./auth/auth.module";
 import { VotesService } from "./votes/votes.service";
 import { VotesModule } from "./votes/votes.module";
 
-const dbConfig = config.get("db");
-
 @Module({
 	imports: [
 		GraphQLModule.forRoot({

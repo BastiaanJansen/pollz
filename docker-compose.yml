@@ -4,7 +4,7 @@ services:
     mongo:
         image: mongo
         volumes:
-            - ./data:/data/db
+            - data:/data/db
     client:
         build: ./client
         ports:
@@ -13,4 +13,7 @@ services:
         build: ./server
         ports:
             - 3000:3000
+
+volumes:
+    data:
     

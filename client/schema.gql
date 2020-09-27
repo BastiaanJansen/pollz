@@ -1,0 +1,47 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateOptionDto {
+	name: String!
+}
+
+input CreatePollDto {
+	question: String!
+	options: [CreateOptionDto!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+	createPoll(input: CreatePollDto!): Poll!
+	vote(id: String!): Poll!
+}
+
+type Option {
+	_id: ID!
+	name: String!
+	votes: Int!
+}
+
+type Poll {
+	_id: ID!
+	question: String!
+	options: [Option!]!
+	totalVotes: Float!
+	private: Boolean!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
+
+type Query {
+	polls: [Poll!]!
+	poll(id: String!): Poll!
+}
+
+type Subscription {
+	optionVoted(id: String!): Poll!
+}

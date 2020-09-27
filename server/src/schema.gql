@@ -1,0 +1,93 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateOptionDto {
+  name: String!
+}
+
+input CreatePollDto {
+  question: String!
+  private: Boolean = false
+  options: [CreateOptionDto!]!
+}
+
+input CreateUserDto {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input CreateVoteDto {
+  optionId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input GetPollsFilterDto {
+  private: Boolean
+  userId: String
+}
+
+type Mutation {
+  createPoll(input: CreatePollDto!): Poll!
+  delete(id: String!): Boolean!
+  signUp(input: CreateUserDto!): User!
+  signIn(input: SignInDto!): SignInType!
+  vote(input: CreateVoteDto!): Poll!
+  unvote(id: String!): Poll!
+}
+
+type Option {
+  _id: ID!
+  name: String!
+  winner: Boolean!
+  votes: [Vote!]!
+  totalVotes: Float!
+}
+
+type Poll {
+  _id: ID!
+  question: String!
+  options: [Option!]!
+  totalVotes: Float!
+  private: Boolean!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  polls(filters: GetPollsFilterDto!): [Poll!]!
+  poll(id: String!): Poll!
+  getUser(id: String!): User!
+}
+
+input SignInDto {
+  email: String!
+  password: String!
+}
+
+type SignInType {
+  token: String!
+}
+
+type Subscription {
+  newPoll: Poll!
+  optionVoted(id: String!): Poll!
+}
+
+type User {
+  _id: ID!
+  username: String!
+  email: String!
+}
+
+type Vote {
+  _id: ID!
+  user: User!
+  createdAt: DateTime!
+}
